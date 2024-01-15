@@ -10,7 +10,7 @@ public class Bdd {
     public Connection getInstance() throws SQLException {
         if(this.instance == null){
             this.instance = DriverManager.getConnection(
-                    "jdbc:mysql://avnadmin:AVNS_Ra_VGdFXFfTnEvLhwPz@remote-desktop-manager-remote-desktop-manager.a.aivencloud.com:19165/defaultdb?ssl-mode=REQUIRED");
+                    "jdbc:mysql://localhost:3306/rhp-java", "root", "");
             return this.instance;
         }
         else {
