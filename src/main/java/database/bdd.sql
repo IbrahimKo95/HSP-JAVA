@@ -4,9 +4,10 @@ CREATE TABLE Utilisateurs(
    prenom VARCHAR(255) NOT NULL,
    email VARCHAR(255) NOT NULL,
    role VARCHAR(255) NOT NULL,
+   mdp VARCHAR(255) NOT NULL,
    PRIMARY KEY(id),
    UNIQUE(email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 CREATE TABLE Patients(
    id INT,
@@ -16,9 +17,9 @@ CREATE TABLE Patients(
    email VARCHAR(255) NOT NULL,
    tel INT NOT NULL,
    adresse VARCHAR(255) NOT NULL,
-   id_utilisateur INT,
+   id_secretaire INT,
    PRIMARY KEY(id),
-   FOREIGN KEY(id_utilisateur) REFERENCES Utilisateurs(id)
+   FOREIGN KEY(id_secretaire) REFERENCES Utilisateurs(id)
 );
 
 CREATE TABLE Dossiers_patients(
@@ -121,5 +122,3 @@ CREATE TABLE Commandes_concerne(
    FOREIGN KEY(id_fiche_produit) REFERENCES Fiches_produits(id),
    FOREIGN KEY(id_commande) REFERENCES Commande_Produit(id)
 );
-
-
