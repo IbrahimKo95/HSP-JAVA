@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import models.GS;
 
 import java.sql.SQLException;
 
@@ -27,7 +28,15 @@ public class LoginController {
         } else {
             UtilisateurController utilisateurController = new UtilisateurController();
             if(utilisateurController.connexion(emailInput.getText(), mdpInput.getText()) != null) {
-                HelloApplication.changeScene("homeSecretaire");
+                if(utilisateurController.connexion(emailInput.getText(), mdpInput.getText()).getRole() == "secretaire") {
+                    HelloApplication.changeScene("homeSecretaire");
+                } else if (utilisateurController.connexion(emailInput.getText(), mdpInput.getText()).getRole() == "medecin"){
+                    HelloApplication.changeScene("homeMedecin");
+                } else if (utilisateurController.connexion(emailInput.getText(), mdpInput.getText()).getRole() == "admin"){
+                    HelloApplication.changeScene("homeAdmin");
+                } else {
+                    HelloApplication.changeScene("homeGS", new HomeGSController((GS) utilisateurController.connexion(emailInput.getText(), mdpInput.getText())));
+                }
                 System.out.println("connected");
             } else {
                 label_error.setText("Email ou mot de passe incorrect !");
