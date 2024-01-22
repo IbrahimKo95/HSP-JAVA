@@ -5,5 +5,6 @@ module appli {
     requires java.dotenv;
 
     opens appli to javafx.fxml;
+    opens appli.Secretaire to javafx.fxml;
     exports appli;
 }
