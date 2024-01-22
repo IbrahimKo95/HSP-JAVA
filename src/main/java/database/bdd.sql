@@ -1,5 +1,5 @@
 CREATE TABLE Utilisateurs(
-   id INT,
+   id INT AUTO_INCREMENT,
    nom VARCHAR(255) NOT NULL,
    prenom VARCHAR(255) NOT NULL,
    email VARCHAR(255) NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE Utilisateurs(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 CREATE TABLE Patients(
-   id INT,
+   id INT AUTO_INCREMENT,
    nom VARCHAR(255) NOT NULL,
    prenom VARCHAR(255) NOT NULL,
    num_secu VARCHAR(255) NOT NULL,
@@ -23,12 +23,12 @@ CREATE TABLE Patients(
 );
 
 CREATE TABLE Dossiers_patients(
-   id INT,
+   id INT AUTO_INCREMENT,
    date_venue DATE NOT NULL,
    heure_venue TIME NOT NULL,
    gravite INT NOT NULL,
    symptomes TEXT NOT NULL,
-   conclusion BOOLEAN,
+   conclusion INT,
    id_medecin INT,
    id_patient INT NOT NULL,
    id_secretaire INT,
@@ -39,13 +39,13 @@ CREATE TABLE Dossiers_patients(
 );
 
 CREATE TABLE Chambres(
-   id VARCHAR(50),
+   id INT AUTO_INCREMENT,
    numero INT NOT NULL,
    PRIMARY KEY(id)
 );
 
 CREATE TABLE Demandes_produits(
-   id INT,
+   id INT AUTO_INCREMENT,
    raison TEXT NOT NULL,
    statut INT NOT NULL,
    id_gs INT,
@@ -56,7 +56,7 @@ CREATE TABLE Demandes_produits(
 );
 
 CREATE TABLE Fiches_produits(
-   id INT,
+   id INT AUTO_INCREMENT,
    libelle VARCHAR(255) NOT NULL,
    description TEXT NOT NULL,
    niv_dangerosite INT NOT NULL,
@@ -67,13 +67,13 @@ CREATE TABLE Fiches_produits(
 );
 
 CREATE TABLE Fournisseurs(
-   id INT,
+   id INT AUTO_INCREMENT,
    nom VARCHAR(255) NOT NULL,
    PRIMARY KEY(id)
 );
 
 CREATE TABLE Commande_Produit(
-   id INT,
+   id INT AUTO_INCREMENT,
    raison TEXT NOT NULL,
    statut INT NOT NULL,
    id_gs INT NOT NULL,
@@ -84,11 +84,11 @@ CREATE TABLE Commande_Produit(
 );
 
 CREATE TABLE Hospitalisations(
-   id INT,
+   id INT AUTO_INCREMENT,
    date_hospitalisation DATE NOT NULL,
    heure_hospitalisation TIME NOT NULL,
    date_fin_hospitalisation DATETIME,
-   id_chambre VARCHAR(50) NOT NULL,
+   id_chambre INT NOT NULL,
    id_dossier INT NOT NULL,
    PRIMARY KEY(id),
    UNIQUE(id_dossier),
