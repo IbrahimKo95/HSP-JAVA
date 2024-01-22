@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import models.GS;
+import models.Secretaire;
 import models.Utilisateur;
 
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public class LoginController {
                 Utilisateur utilisateur = utilisateurController.connexion(emailInput.getText(), mdpInput.getText());
                 System.out.println(utilisateur.getRole());
                 if(Objects.equals(utilisateur.getRole(), "secretaire")) {
-                    HelloApplication.changeScene("homeSecretaire");
+                    HelloApplication.changeScene("homeSecretaire", new HomeSecretaireController((Secretaire) utilisateur));
                 } else if (Objects.equals(utilisateur.getRole(), "medecin")){
                     HelloApplication.changeScene("homeMedecin");
                 } else if (Objects.equals(utilisateur.getRole(), "admin")){
