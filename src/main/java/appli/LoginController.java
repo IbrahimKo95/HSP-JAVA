@@ -7,8 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import models.GS;
+import models.Utilisateur;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class LoginController {
     @FXML
@@ -28,13 +30,15 @@ public class LoginController {
         } else {
             UtilisateurController utilisateurController = new UtilisateurController();
             if(utilisateurController.connexion(emailInput.getText(), mdpInput.getText()) != null) {
-                if(utilisateurController.connexion(emailInput.getText(), mdpInput.getText()).getRole() == "secretaire") {
+                Utilisateur utilisateur = utilisateurController.connexion(emailInput.getText(), mdpInput.getText());
+                System.out.println(utilisateur.getRole());
+                if(Objects.equals(utilisateur.getRole(), "secretaire")) {
                     HelloApplication.changeScene("homeSecretaire");
-                } else if (utilisateurController.connexion(emailInput.getText(), mdpInput.getText()).getRole() == "medecin"){
+                } else if (Objects.equals(utilisateur.getRole(), "medecin")){
                     HelloApplication.changeScene("homeMedecin");
-                } else if (utilisateurController.connexion(emailInput.getText(), mdpInput.getText()).getRole() == "admin"){
+                } else if (Objects.equals(utilisateur.getRole(), "admin")){
                     HelloApplication.changeScene("homeAdmin");
-                } else {
+                } else if (Objects.equals(utilisateur.getRole(), "gs")){
                     HelloApplication.changeScene("homeGS", new HomeGSController((GS) utilisateurController.connexion(emailInput.getText(), mdpInput.getText())));
                 }
                 System.out.println("connected");
