@@ -1,5 +1,7 @@
 package appli;
 
+import appli.GS.AjouterFournisseurController;
+import appli.GS.FournisseurController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import models.GS;
+import appli.BaseController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,13 +55,48 @@ public class HomeGSController implements Initializable {
         Button button = (Button) event.getSource();
         if(Objects.equals(button.getText(), "Fournisseurs")) {
             changePane("fournisseurs");
+
         } else if (Objects.equals(button.getText(), "Accueil")) {
             changePane("Accueil");
         }
     }
 
-    void changePane(String name) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource("/appli/pages/GS/"+name+".fxml"));
+   public void changePane(String name) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/GS/"+name+".fxml"));
+        Pane pane = loader.load();
+       Object controller = loader.getController();
+       if (controller instanceof BaseController) {
+           BaseController baseController = (BaseController) controller;
+           baseController.setMainPane(basePane);
+       }
+
+        basePane.getChildren().add(pane);
+    }
+
+    public void changePaneSide(String name) throws IOException {
+        basePane.getChildren().setAll();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/GS/"+name+".fxml"));
+        Pane pane = loader.load();
+        Object controller = loader.getController();
+        if (controller instanceof BaseController) {
+            BaseController baseController = (BaseController) controller;
+            baseController.setMainPane(basePane);
+        }
+        basePane.getChildren().add(pane);
+    }
+
+    public void changePaneSide(String name, Object parameter) throws IOException {
+        basePane.getChildren().setAll();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/GS/" + name + ".fxml"));
+        Pane pane = loader.load();
+        Object controller = loader.getController();
+
+        if (controller instanceof BaseController) {
+            BaseController<Object> baseController = (BaseController<Object>) controller;
+            baseController.setMainPane(basePane);
+            baseController.setObject(parameter);
+        }
+
         basePane.getChildren().add(pane);
     }
 

@@ -1,5 +1,6 @@
 package appli.GS;
 
+import appli.BaseController;
 import appli.HomeGSController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,14 +10,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import models.Fournisseur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class FournisseurController implements Initializable {
+public class FournisseurController implements Initializable, BaseController<Void> {
 
     @FXML
     private AnchorPane FournisseursPane;
@@ -36,7 +39,21 @@ public class FournisseurController implements Initializable {
     @FXML
     private Button editButton;
 
+    @FXML
+    private Button showButton;
+
     private Fournisseur activeItem;
+
+    private Pane mainPane;
+
+    public void setMainPane(Pane mainPane) {
+        this.mainPane = mainPane;
+    }
+
+    @Override
+    public void setObject(Void object) {
+
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -64,8 +81,9 @@ public class FournisseurController implements Initializable {
         }
     }
     @FXML
-    void add(ActionEvent event) {
-
+    void add(ActionEvent event) throws IOException {
+        HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
+        homeGSController.changePaneSide("AjouterFournisseur");
     }
 
     @FXML
@@ -82,8 +100,10 @@ public class FournisseurController implements Initializable {
     }
 
     @FXML
-    void edit(ActionEvent event) {
-
+    void edit(ActionEvent event) throws IOException {
+        System.out.println(this.activeItem.getNom());
+        HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
+        homeGSController.changePaneSide("ModifierFournisseur", this.activeItem);
     }
 
     @FXML
@@ -112,8 +132,14 @@ public class FournisseurController implements Initializable {
         if(!list.getSelectionModel().getSelectedItems().isEmpty()){
             editButton.setDisable(false);
             deleteButton.setDisable(false);
+            showButton.setDisable(false);
             this.activeItem = list.getSelectionModel().getSelectedItem();
         }
+    }
+
+    @FXML
+    void showProducts(ActionEvent event) {
+
     }
 
 }

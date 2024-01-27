@@ -1,11 +1,15 @@
 package appli;
 
+import controllers.UtilisateurController;
 import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Medecin;
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.PasswordGenerator;
 
 import java.io.IOException;
 
@@ -20,6 +24,14 @@ public class HelloApplication extends Application {
         maStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+
+        CharacterRule alphabeticals = new CharacterRule(EnglishCharacterData.Alphabetical);
+        CharacterRule digits = new CharacterRule(EnglishCharacterData.Digit);
+
+        PasswordGenerator passwordGenerator = new PasswordGenerator();
+        String password = passwordGenerator.generatePassword(10, digits, alphabeticals);
+        System.out.println(password);
+
         maStage.setTitle("RHP");
         maStage.setScene(scene);
         maStage.setResizable(false);
@@ -57,21 +69,25 @@ public class HelloApplication extends Application {
      * @param controlleur Controlleur associer à la page
      */
 
-    public static void changeScene(String fxml, Object controlleur) {
+    public static void changeScene(String fxml, Object controller) {
         maStage.close();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml+".fxml"));
-        fxmlLoader.setController(controlleur);
+        fxmlLoader.setController(controller);
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load());
-            maStage.setTitle("RHP");
-            maStage.setScene(scene);
-            maStage.setResizable(false);
-            maStage.show();
-            maStage.centerOnScreen();
+
+            // Définissez la UserData avec le contrôleur passé en paramètre
+            scene.setUserData(controller);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        maStage.setTitle("RHP");
+        maStage.setScene(scene);
+        maStage.setResizable(false);
+        maStage.show();
+        maStage.centerOnScreen();
     }
 
     public static void newStage(String fxml, Object controller) {

@@ -16,6 +16,8 @@ public class PatientController {
     @FXML
     void RedirectToAjoutPatients(ActionEvent event) throws IOException {
 
+    }
+
 }
 
 

@@ -32,4 +32,24 @@ public class FournisseurController {
         delete.setInt(1, id);
         delete.executeUpdate();
     }
+
+
+    public void add(String nom) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement req = co.prepareStatement(
+                "INSERT INTO fournisseurs (nom) VALUES (?)");
+        req.setString(1, nom);
+        req.executeUpdate();
+    }
+
+    public void edit(String nom, int id) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement req = co.prepareStatement(
+                "UPDATE fournisseurs SET nom = ? WHERE id = ?");
+        req.setString(1, nom);
+        req.setInt(2, id);
+        req.executeUpdate();
+    }
 }
