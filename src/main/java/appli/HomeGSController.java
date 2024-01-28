@@ -35,6 +35,10 @@ public class HomeGSController implements Initializable {
 
     private GS utilisateur;
 
+    public GS getUtilisateur() {
+        return utilisateur;
+    }
+
     public HomeGSController(GS utilisateur) {
         this.utilisateur = utilisateur;
     }
@@ -58,6 +62,8 @@ public class HomeGSController implements Initializable {
 
         } else if (Objects.equals(button.getText(), "Accueil")) {
             changePane("Accueil");
+        } else if (Objects.equals(button.getText(), "Fiches produits")) {
+            changePane("FichesProduits");
         }
     }
 
