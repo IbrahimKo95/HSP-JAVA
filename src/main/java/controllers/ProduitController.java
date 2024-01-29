@@ -16,7 +16,8 @@ public class ProduitController {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
         PreparedStatement recupererTout = co.prepareStatement(
-                "SELECT * FROM produits");
+                "SELECT * FROM produits WHERE id_fournisseur = ?");
+        recupererTout.setInt(1, id);
         ResultSet res = recupererTout.executeQuery();
         ArrayList<Produit> produits = new ArrayList<>();
         while(res.next()){

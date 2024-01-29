@@ -21,11 +21,9 @@ public class UtilisateurController {
         ResultSet res = login.executeQuery();
         if(res.next()){
             if(res.getString(5).equals("gs")){
-                ArrayList<FicheProduit> list = new ArrayList<>();
-                return new GS(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(6), res.getString(5), list);
+                return new GS(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(6), res.getString(5));
             } else if (res.getString(5).equals("medecin")) {
-                ArrayList<DemandeProduit> list = new ArrayList<>();
-                return new Medecin(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(6), res.getString(5), list);
+                return new Medecin(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(6), res.getString(5));
             } else if (res.getString(5).equals("secretaire")) {
                 return new Secretaire(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(6), res.getString(5));
             }

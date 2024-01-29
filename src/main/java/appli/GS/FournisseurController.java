@@ -101,7 +101,6 @@ public class FournisseurController implements Initializable, BaseController<Void
 
     @FXML
     void edit(ActionEvent event) throws IOException {
-        System.out.println(this.activeItem.getNom());
         HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
         homeGSController.changePaneSide("ModifierFournisseur", this.activeItem);
     }
@@ -138,8 +137,9 @@ public class FournisseurController implements Initializable, BaseController<Void
     }
 
     @FXML
-    void showProducts(ActionEvent event) {
-
+    void showProducts(ActionEvent event) throws IOException {
+        HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
+        homeGSController.changePaneSide("Produits", this.activeItem);
     }
 
 }
