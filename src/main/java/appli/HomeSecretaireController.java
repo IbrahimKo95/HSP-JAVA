@@ -52,15 +52,49 @@ public class HomeSecretaireController implements Initializable {
     void changePage(ActionEvent event) throws IOException {
         basePane.getChildren().setAll();
         Button button = (Button) event.getSource();
-        if(Objects.equals(button.getText(), "Patients")) {
+        if(Objects.equals(button.getText(), "Accueil")) {
             changePane("Patients");
-        } else if (Objects.equals(button.getText(), "Dossiers")) {
-            changePane("Dossiers");
+        } else if (Objects.equals(button.getText(), "Dossiers Patients")) {
+            changePane("DossiersPatients");
         }
     }
 
-    void changePane(String name) throws IOException {
-        Pane pane = FXMLLoader.load(getClass().getResource("/appli/pages/Secretaire/"+name+".fxml"));
+    public void changePane(String name) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/Secretaire/"+name+".fxml"));
+        Pane pane = loader.load();
+        Object controller = loader.getController();
+        if (controller instanceof BaseController) {
+            BaseController baseController = (BaseController) controller;
+            baseController.setMainPane(basePane);
+        }
+
+        basePane.getChildren().add(pane);
+    }
+
+    public void changePaneSide(String name) throws IOException {
+        basePane.getChildren().setAll();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/Secretaire/"+name+".fxml"));
+        Pane pane = loader.load();
+        Object controller = loader.getController();
+        if (controller instanceof BaseController) {
+            BaseController baseController = (BaseController) controller;
+            baseController.setMainPane(basePane);
+        }
+        basePane.getChildren().add(pane);
+    }
+
+    public void changePaneSide(String name, Object parameter) throws IOException {
+        basePane.getChildren().setAll();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/Secretaire/" + name + ".fxml"));
+        Pane pane = loader.load();
+        Object controller = loader.getController();
+
+        if (controller instanceof BaseController) {
+            BaseController<Object> baseController = (BaseController<Object>) controller;
+            baseController.setMainPane(basePane);
+            baseController.setObject(parameter);
+        }
+
         basePane.getChildren().add(pane);
     }
 

@@ -1,5 +1,8 @@
 package appli.Secretaire;
 
+import appli.BaseController;
+import appli.HomeGSController;
+import appli.HomeSecretaireController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,12 +15,24 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Objects;
 
-public class PatientController {
+public class PatientController implements BaseController<Void> {
+
+    private Pane mainPane;
     @FXML
     void RedirectToAjoutPatients(ActionEvent event) throws IOException {
-
+        HomeSecretaireController homeSecretaireController = (HomeSecretaireController) mainPane.getScene().getUserData();
+        homeSecretaireController.changePaneSide("AjouterPatient");
     }
 
+    @Override
+    public void setMainPane(Pane mainPane) {
+        this.mainPane = mainPane;
+    }
+
+    @Override
+    public void setObject(Void object) {
+
+    }
 }
 
 
