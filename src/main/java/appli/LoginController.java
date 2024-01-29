@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import models.GS;
+import models.Medecin;
 import models.Secretaire;
 import models.Utilisateur;
 
@@ -36,7 +37,7 @@ public class LoginController {
                 if(Objects.equals(utilisateur.getRole(), "secretaire")) {
                     HelloApplication.changeScene("homeSecretaire", new HomeSecretaireController((Secretaire) utilisateur));
                 } else if (Objects.equals(utilisateur.getRole(), "medecin")){
-                    HelloApplication.changeScene("homeMedecin");
+                    HelloApplication.changeScene("homeMedecin", new HomeMedecinController((Medecin) utilisateur));
                 } else if (Objects.equals(utilisateur.getRole(), "admin")){
                     HelloApplication.changeScene("homeAdmin");
                 } else if (Objects.equals(utilisateur.getRole(), "gs")){
