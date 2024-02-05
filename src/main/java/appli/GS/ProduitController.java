@@ -1,6 +1,7 @@
 package appli.GS;
 
 import appli.BaseController;
+import appli.HomeGSController;
 import controllers.FicheProduitController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +16,7 @@ import models.FicheProduit;
 import models.Fournisseur;
 import models.Produit;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -41,6 +43,8 @@ public class ProduitController implements BaseController<Fournisseur> {
 
     @FXML
     private Label labelTitle;
+
+    private Produit activeItem;
 
 
     private Pane mainPane;
@@ -85,13 +89,22 @@ public class ProduitController implements BaseController<Fournisseur> {
         }
     }
     @FXML
-    void add(ActionEvent event) {
-
+    void add(ActionEvent event) throws IOException {
+        HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
+        homeGSController.changePaneSide("AjouterProduit", fournisseur);
     }
 
     @FXML
-    void delete(ActionEvent event) {
-
+    void delete(ActionEvent event) throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText("Vous êtes sur le point de supprimer ce produit ?");
+        alert.setContentText("Etes vous sur de vouloir le supprimer ?");
+        if(alert.showAndWait().get() == ButtonType.OK) {
+            controllers.ProduitController produitController = new controllers.ProduitController();
+            produitController.delete(activeItem.getId_fournisseur(), activeItem.getId_fiche_produit());
+            refreshList();
+        }
     }
 
     @FXML
@@ -106,6 +119,10 @@ public class ProduitController implements BaseController<Fournisseur> {
 
     @FXML
     void selectItems(MouseEvent event) {
-
+        if(!list.getSelectionModel().getSelectedItems().isEmpty()){
+            editButton.setDisable(false);
+            deleteButton.setDisable(false);
+            this.activeItem = list.getSelectionModel().getSelectedItem();
+        }
     }
 }

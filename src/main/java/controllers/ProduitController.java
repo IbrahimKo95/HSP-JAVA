@@ -25,4 +25,26 @@ public class ProduitController {
         }
         return produits;
     }
+
+
+    public void delete(int idFournisseur, int idFicheProduit) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement delete = co.prepareStatement(
+                "DELETE FROM produits WHERE id_fournisseur = ? AND id_fiche_produit = ?");
+        delete.setInt(1, idFournisseur);
+        delete.setInt(2, idFicheProduit);
+        delete.executeUpdate();
+    }
+
+    public void add(int id_fiche_produit, int id_fournisseur, double prix) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement delete = co.prepareStatement(
+                "INSERT INTO produits (id_fiche_produit, id_fournisseur, prix) VALUES (?,?,?)");
+        delete.setInt(1, id_fiche_produit);
+        delete.setInt(2, id_fournisseur);
+        delete.setDouble(3, prix);
+        delete.executeUpdate();
+    }
 }
