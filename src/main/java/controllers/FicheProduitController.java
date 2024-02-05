@@ -63,6 +63,7 @@ public class FicheProduitController {
         Connection co = bdd.getInstance();
         PreparedStatement recupererTout = co.prepareStatement(
                 "SELECT * FROM fiches_produits WHERE id = ?");
+        recupererTout.setInt(1, id);
         ResultSet res = recupererTout.executeQuery();
         res.next();
         return new FicheProduit(res.getInt(1), res.getString(2), res.getString(3), res.getInt(4), res.getInt(5), res.getInt(6));
