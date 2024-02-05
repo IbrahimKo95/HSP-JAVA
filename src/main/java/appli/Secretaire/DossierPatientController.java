@@ -7,9 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListCell;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import models.Fournisseur;
 
@@ -21,6 +20,23 @@ public class DossierPatientController implements BaseController<Void> {
 
     private Pane mainPane;
     private Fournisseur activeItem;
+    @FXML
+    private AnchorPane FournisseursPane;
+
+    @FXML
+    private Button addButton;
+
+    @FXML
+    private Button deleteButton;
+
+    @FXML
+    private Button editButton;
+
+    @FXML
+    private TextField researchBar;
+
+    @FXML
+    private Button showButton;
 
 
     @Override
@@ -39,12 +55,28 @@ public class DossierPatientController implements BaseController<Void> {
 
 
 
+
+
+
     @FXML
-    void edit(ActionEvent event) throws IOException {
-        HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
-        homeGSController.changePaneSide("ModifierFournisseur", this.activeItem);
+    void delete(ActionEvent event) {
+
     }
 
+    @FXML
+    void edit(ActionEvent event) {
+
+    }
+
+    @FXML
+    void research(ActionEvent event) {
+
+    }
+
+    @FXML
+    void showProducts(ActionEvent event) {
+
+    }
 
 }
 
