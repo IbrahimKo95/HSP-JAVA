@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -31,14 +32,10 @@ public class FicheProduitController implements Initializable, BaseController<Voi
     @FXML
     private Button deleteButton;
 
-    @FXML
-    private Button detailsButton;
 
     @FXML
     private Button editButton;
 
-    @FXML
-    private ListView<FicheProduit> list;
 
     private FicheProduit activeItem;
 
@@ -46,6 +43,20 @@ public class FicheProduitController implements Initializable, BaseController<Voi
     private TextField researchBar;
 
     private Pane mainPane;
+
+    @FXML
+    private TableColumn<FicheProduit, String> DescCol;
+
+    @FXML
+    private TableColumn<FicheProduit, Integer> QteCol;
+
+    @FXML
+    private TableColumn<FicheProduit, String> libelleCol;
+    @FXML
+    private TableColumn<FicheProduit, Integer> DangerositeCol;
+
+    @FXML
+    private TableView<FicheProduit> tableView;
 
     @Override
     public void setMainPane(Pane mainPane) {
@@ -59,39 +70,24 @@ public class FicheProduitController implements Initializable, BaseController<Voi
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        refreshList();
-    }
-
-    public void refreshList() {
-        controllers.FicheProduitController ficheProduitController = new controllers.FicheProduitController();
         try {
-            ObservableList<FicheProduit> listeFiches =  FXCollections.observableArrayList(ficheProduitController.getAll());
-            list.setItems(listeFiches);
-            list.setCellFactory(param -> new ListCell<FicheProduit>() {
-                @Override
-                protected void updateItem(FicheProduit item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null || item.getLibelle() == null) {
-                        setText(null);
-                    } else {
-                        setText(item.getLibelle());
-                    }
-                }
-            });
+            refreshList();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @FXML
-    void selectItems(MouseEvent event) {
-        if(!list.getSelectionModel().getSelectedItems().isEmpty()){
-            editButton.setDisable(false);
-            deleteButton.setDisable(false);
-            detailsButton.setDisable(false);
-            this.activeItem = list.getSelectionModel().getSelectedItem();
-        }
+    public void refreshList() throws SQLException {
+        controllers.FicheProduitController ficheProduitController = new controllers.FicheProduitController();
+        libelleCol.setCellValueFactory(new PropertyValueFactory<>("libelle"));
+        DescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        DangerositeCol.setCellValueFactory(new PropertyValueFactory<>("niv_dangerosite"));
+        QteCol.setCellValueFactory(new PropertyValueFactory<>("qte_stock"));
+        ObservableList<FicheProduit> list = FXCollections.observableArrayList(ficheProduitController.getAll());
+        tableView.setItems(list);
+
     }
+
     @FXML
     void add(ActionEvent event) throws IOException {
         HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
@@ -112,7 +108,7 @@ public class FicheProduitController implements Initializable, BaseController<Voi
     }
 
     @FXML
-    void edit(ActionEvent event) throws IOException {
+    void edit(ActionEvent event) throws IOException, SQLException {
         HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
         homeGSController.changePaneSide("ModifierFicheProduit", this.activeItem);
     }
@@ -122,9 +118,14 @@ public class FicheProduitController implements Initializable, BaseController<Voi
 
     }
 
+
     @FXML
-    void showDetails(ActionEvent event) {
-        HelloApplication.newStage("popupFicheProduit", new PopUpFicheProduitController(this.activeItem));
+    void select(MouseEvent event) {
+        if(tableView.getSelectionModel().getSelectedItem() != null){
+            editButton.setDisable(false);
+            deleteButton.setDisable(false);
+            this.activeItem = tableView.getSelectionModel().getSelectedItem();
+        }
     }
 
 

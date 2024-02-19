@@ -10,5 +10,6 @@ module appli {
     opens appli.Administrateur to javafx.fxml;
     opens appli.GS to javafx.fxml;
     opens appli.Medecin to javafx.fxml;
+    opens models to javafx.base;
     exports appli;
 }

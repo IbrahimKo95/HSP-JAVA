@@ -12,6 +12,7 @@ import models.Medecin;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -77,7 +78,7 @@ public class HomeMedecinController implements Initializable {
         basePane.getChildren().add(pane);
     }
 
-    public void changePaneSide(String name, Object parameter) throws IOException {
+    public void changePaneSide(String name, Object parameter) throws IOException, SQLException {
         basePane.getChildren().setAll();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/Medecin/" + name + ".fxml"));
         Pane pane = loader.load();

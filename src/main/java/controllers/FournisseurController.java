@@ -52,4 +52,15 @@ public class FournisseurController {
         req.setInt(2, id);
         req.executeUpdate();
     }
+
+    public Fournisseur getById(int id) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement recupererTout = co.prepareStatement(
+                "SELECT * FROM fournisseurs WHERE id = ?");
+        recupererTout.setInt(1, id);
+        ResultSet res = recupererTout.executeQuery();
+        res.next();
+        return new Fournisseur(res.getInt(1), res.getString(2));
+    }
 }

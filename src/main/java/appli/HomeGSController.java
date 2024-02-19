@@ -91,7 +91,7 @@ public class HomeGSController implements Initializable {
         basePane.getChildren().add(pane);
     }
 
-    public void changePaneSide(String name, Object parameter) throws IOException {
+    public void changePaneSide(String name, Object parameter) throws IOException, SQLException {
         basePane.getChildren().setAll();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/GS/" + name + ".fxml"));
         Pane pane = loader.load();

@@ -47,4 +47,15 @@ public class ProduitController {
         delete.setDouble(3, prix);
         delete.executeUpdate();
     }
+
+    public void edit(int id_fiche_produit, int id_fournisseur, double prix) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement delete = co.prepareStatement(
+                "UPDATE produits SET prix = ? WHERE id_fiche_produit = ? AND id_fournisseur = ?");
+        delete.setDouble(1, prix);
+        delete.setInt(2, id_fiche_produit);
+        delete.setInt(3, id_fournisseur);
+        delete.executeUpdate();
+    }
 }

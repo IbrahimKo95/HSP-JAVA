@@ -12,6 +12,7 @@ import models.Secretaire;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -83,7 +84,7 @@ public class HomeSecretaireController implements Initializable {
         basePane.getChildren().add(pane);
     }
 
-    public void changePaneSide(String name, Object parameter) throws IOException {
+    public void changePaneSide(String name, Object parameter) throws IOException, SQLException {
         basePane.getChildren().setAll();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/Secretaire/" + name + ".fxml"));
         Pane pane = loader.load();
