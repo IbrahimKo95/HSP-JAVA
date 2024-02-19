@@ -39,7 +39,7 @@ public class LoginController {
                 } else if (Objects.equals(utilisateur.getRole(), "medecin")){
                     HelloApplication.changeScene("homeMedecin", new HomeMedecinController((Medecin) utilisateur));
                 } else if (Objects.equals(utilisateur.getRole(), "admin")){
-                    HelloApplication.changeScene("homeAdmin");
+                    HelloApplication.changeScene("homeAdmin", new HomeAdminController(utilisateur));
                 } else if (Objects.equals(utilisateur.getRole(), "gs")){
                     HelloApplication.changeScene("homeGS", new HomeGSController((GS) utilisateurController.connexion(emailInput.getText(), mdpInput.getText())));
                 }

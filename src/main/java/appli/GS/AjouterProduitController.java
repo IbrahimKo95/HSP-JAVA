@@ -1,6 +1,7 @@
 package appli.GS;
 
 import appli.BaseController;
+import appli.HomeGSController;
 import controllers.FicheProduitController;
 import controllers.ProduitController;
 import javafx.beans.value.ChangeListener;
@@ -15,6 +16,7 @@ import javafx.util.Callback;
 import models.FicheProduit;
 import models.Fournisseur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,9 +37,11 @@ public class AjouterProduitController implements Initializable, BaseController<F
     private TextField priceInput;
 
     @FXML
-    void add(ActionEvent event) throws SQLException {
+    void add(ActionEvent event) throws SQLException, IOException {
         ProduitController produitController = new ProduitController();
         produitController.add(comboBox.getValue().getId(), this.fournisseur.getId(), Double.parseDouble(priceInput.getText()));
+        HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
+        homeGSController.changePaneSide("Produits", this.fournisseur);
     }
 
     @Override

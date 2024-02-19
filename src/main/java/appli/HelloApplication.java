@@ -24,14 +24,6 @@ public class HelloApplication extends Application {
         maStage = stage;
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-
-        CharacterRule alphabeticals = new CharacterRule(EnglishCharacterData.Alphabetical);
-        CharacterRule digits = new CharacterRule(EnglishCharacterData.Digit);
-
-        PasswordGenerator passwordGenerator = new PasswordGenerator();
-        String password = passwordGenerator.generatePassword(10, digits, alphabeticals);
-        System.out.println(password);
-
         maStage.setTitle("RHP");
         maStage.setScene(scene);
         maStage.setResizable(false);
