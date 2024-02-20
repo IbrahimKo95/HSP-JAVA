@@ -89,7 +89,7 @@ public class FicheProduitController implements Initializable, BaseController<Voi
     }
 
     @FXML
-    void add(ActionEvent event) throws IOException {
+    void add(ActionEvent event) throws IOException, SQLException {
         HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
         homeGSController.changePaneSide("AjouterFicheProduit");
     }

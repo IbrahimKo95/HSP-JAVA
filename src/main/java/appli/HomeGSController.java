@@ -54,7 +54,7 @@ public class HomeGSController implements Initializable {
     }
 
     @FXML
-    void changePage(ActionEvent event) throws IOException {
+    void changePage(ActionEvent event) throws IOException, SQLException {
         basePane.getChildren().setAll();
         Button button = (Button) event.getSource();
         if(Objects.equals(button.getText(), "Fournisseurs")) {
@@ -67,7 +67,7 @@ public class HomeGSController implements Initializable {
         }
     }
 
-   public void changePane(String name) throws IOException {
+   public void changePane(String name) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/GS/"+name+".fxml"));
         Pane pane = loader.load();
        Object controller = loader.getController();
@@ -79,7 +79,7 @@ public class HomeGSController implements Initializable {
         basePane.getChildren().add(pane);
     }
 
-    public void changePaneSide(String name) throws IOException {
+    public void changePaneSide(String name) throws IOException, SQLException {
         basePane.getChildren().setAll();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/GS/"+name+".fxml"));
         Pane pane = loader.load();

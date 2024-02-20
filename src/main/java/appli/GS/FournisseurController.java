@@ -81,7 +81,7 @@ public class FournisseurController implements Initializable, BaseController<Void
         }
     }
     @FXML
-    void add(ActionEvent event) throws IOException {
+    void add(ActionEvent event) throws IOException, SQLException {
         HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
         homeGSController.changePaneSide("AjouterFournisseur");
     }

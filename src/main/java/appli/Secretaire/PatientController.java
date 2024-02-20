@@ -13,13 +13,14 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class PatientController implements BaseController<Void> {
 
     private Pane mainPane;
     @FXML
-    void RedirectToAjoutPatients(ActionEvent event) throws IOException {
+    void RedirectToAjoutPatients(ActionEvent event) throws IOException, SQLException {
         HomeSecretaireController homeSecretaireController = (HomeSecretaireController) mainPane.getScene().getUserData();
         homeSecretaireController.changePaneSide("AjouterPatient");
     }
