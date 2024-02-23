@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="FournisseursPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="526.0" prefWidth="588.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.GS.ReapprovisionnementController">
+   <children>
+      <Label layoutX="201.0" layoutY="34.0" text="Réapprovisionnement">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="addButton" layoutX="56.0" layoutY="217.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="106.0" text="Ajouter" />
+      <Button fx:id="editButton" disable="true" layoutX="178.0" layoutY="217.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="106.0" text="Modifier" />
+      <Button fx:id="deleteButton" disable="true" layoutX="301.0" layoutY="217.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="106.0" text="Supprimer" />
+      <TextField fx:id="researchBar" layoutX="118.0" layoutY="116.0" prefHeight="34.0" prefWidth="328.0" promptText="Rechercher par nom" />
+      <Button layoutX="446.0" layoutY="116.0" mnemonicParsing="false" onAction="#research" prefHeight="34.0" prefWidth="79.0" text="Rechercher" />
+      <TableView fx:id="tableView" layoutX="56.0" layoutY="257.0" onMouseClicked="#select" prefHeight="270.0" prefWidth="476.0">
+         <columns>
+            <TableColumn fx:id="RaisonCol" prefWidth="351.2000198364258" text="Raison" />
+            <TableColumn fx:id="PrixTotal" prefWidth="123.99996948242188" text="Prix total" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

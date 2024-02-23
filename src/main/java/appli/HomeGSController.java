@@ -59,12 +59,15 @@ public class HomeGSController implements Initializable {
         Button button = (Button) event.getSource();
         if(Objects.equals(button.getText(), "Fournisseurs")) {
             changePane("fournisseurs");
-
         } else if (Objects.equals(button.getText(), "Accueil")) {
             changePane("Accueil");
         } else if (Objects.equals(button.getText(), "Fiches produits")) {
             changePane("FichesProduits");
+        } else if (Objects.equals(button.getText(), "Réapprovisionnement")) {
+            System.out.println(button.getText());
+            changePane("Reapprovisionnement");
         }
+
     }
 
    public void changePane(String name) throws IOException {
