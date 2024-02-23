@@ -48,7 +48,7 @@ public class DossierPatientController implements BaseController<Void> {
     public void setObject(Void object) {
 
     }@FXML
-    void add(ActionEvent event) throws IOException {
+    void add(ActionEvent event) throws IOException, SQLException {
         HomeSecretaireController HomeSecretaireController = (HomeSecretaireController) mainPane.getScene().getUserData();
         HomeSecretaireController.changePaneSide("AjouterDossier");
     }

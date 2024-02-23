@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import models.Medecin;
+import models.Utilisateur;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +28,10 @@ public class HomeMedecinController implements Initializable {
     private Button btnAccueil;
     private Medecin utilisateur;
 
+    public Medecin getUtilisateur() {
+        return utilisateur;
+    }
+
     public HomeMedecinController(Medecin utilisateur) {
         this.utilisateur = utilisateur;
     }
@@ -35,14 +40,16 @@ public class HomeMedecinController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         UsernameLabel.setText(utilisateur.getPrenom()+" "+utilisateur.getNom());
         try {
-            Pane pane = FXMLLoader.load(getClass().getResource("/appli/pages/Medecin/DossierPatient.fxml"));
-            basePane.getChildren().add(pane);
+            changePaneSide("DossierPatient", this.utilisateur);
+
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML
-    void changePage(ActionEvent event) throws IOException {
+    void changePage(ActionEvent event) throws IOException, SQLException {
         basePane.getChildren().setAll();
         Button button = (Button) event.getSource();
         if(Objects.equals(button.getText(), "Dossier Patient")) {
@@ -54,7 +61,7 @@ public class HomeMedecinController implements Initializable {
         }
     }
 
-    public void changePane(String name) throws IOException {
+    public void changePane(String name) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/Medecin/"+name+".fxml"));
         Pane pane = loader.load();
         Object controller = loader.getController();
@@ -66,7 +73,7 @@ public class HomeMedecinController implements Initializable {
         basePane.getChildren().add(pane);
     }
 
-    public void changePaneSide(String name) throws IOException {
+    public void changePaneSide(String name) throws IOException, SQLException {
         basePane.getChildren().setAll();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/Medecin/"+name+".fxml"));
         Pane pane = loader.load();
