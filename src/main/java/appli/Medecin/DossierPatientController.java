@@ -1,6 +1,7 @@
 package appli.Medecin;
 
 import appli.BaseController;
+import appli.HomeGSController;
 import appli.HomeMedecinController;
 import appli.HomeSecretaireController;
 import javafx.collections.FXCollections;
@@ -8,7 +9,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -18,6 +21,7 @@ import models.DossierPatient;
 import models.FicheProduit;
 import models.Medecin;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -26,8 +30,9 @@ import java.util.ResourceBundle;
 
 public class DossierPatientController implements BaseController<Medecin>, Initializable {
 
-
-
+    private DossierPatient activeItem;
+    @FXML
+    private Button showButton;
 
     @FXML
     private TableColumn<DossierPatient, Integer> id;
@@ -63,7 +68,6 @@ public class DossierPatientController implements BaseController<Medecin>, Initia
         table.setItems(list);
 
 
-
         controllers.DossierPatientController MesDossierPatientController = new controllers.DossierPatientController();
         idMesDossiers.setCellValueFactory(new PropertyValueFactory<>("id"));
         dateMesDossiers.setCellValueFactory(new PropertyValueFactory<>("date_venue"));
@@ -74,9 +78,11 @@ public class DossierPatientController implements BaseController<Medecin>, Initia
 
 
     }
+
     private Pane mainPane;
 
     private Medecin medecin;
+
     @Override
     public void setMainPane(Pane mainPane) throws SQLException {
         this.mainPane = mainPane;
@@ -93,5 +99,19 @@ public class DossierPatientController implements BaseController<Medecin>, Initia
         refreshList();
     }
 
+    @FXML
+    void selectItems(MouseEvent event) {
+        if(!table.getSelectionModel().getSelectedItems().isEmpty()){
+            showButton.setDisable(false);
+            this.activeItem = table.getSelectionModel().getSelectedItem();
+        }
 
+    }
+
+    @FXML
+    void showDossier(ActionEvent event) throws IOException, SQLException{
+        HomeMedecinController homeMedecinController = (HomeMedecinController) mainPane.getScene().getUserData();
+        homeMedecinController.changePaneSide("DossierDuPatient", this.activeItem);
+
+    }
 }
