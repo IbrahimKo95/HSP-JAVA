@@ -41,7 +41,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableMesDossiers" prefHeight="382.0" prefWidth="549.0">
+                        <TableView fx:id="tableMesDossiers" onMouseClicked="#selectItemsMesD" prefHeight="382.0" prefWidth="549.0">
                            <columns>
                               <TableColumn fx:id="idMesDossiers" prefWidth="95.33331298828125" text="N°Dossier" />
                               <TableColumn fx:id="dateMesDossiers" prefWidth="90.00003051757812" text="Date" />
@@ -58,6 +58,6 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="showButton" layoutX="19.0" layoutY="149.0" mnemonicParsing="false" onAction="#showDossier" prefHeight="25.0" prefWidth="72.0" text="Voir" />
+      <Button fx:id="showButton" disable="true" layoutX="19.0" layoutY="149.0" mnemonicParsing="false" onAction="#showDossier" prefHeight="25.0" prefWidth="72.0" text="Voir" />
    </children>
 </AnchorPane>

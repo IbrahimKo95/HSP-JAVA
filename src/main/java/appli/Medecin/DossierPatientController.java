@@ -106,12 +106,20 @@ public class DossierPatientController implements BaseController<Medecin>, Initia
             this.activeItem = table.getSelectionModel().getSelectedItem();
         }
 
+
+    }
+    @FXML
+    void selectItemsMesD(MouseEvent event) {
+        if(!tableMesDossiers.getSelectionModel().getSelectedItems().isEmpty()) {
+            showButton.setDisable(false);
+            this.activeItem = tableMesDossiers.getSelectionModel().getSelectedItem();
+        }
     }
 
     @FXML
     void showDossier(ActionEvent event) throws IOException, SQLException{
         HomeMedecinController homeMedecinController = (HomeMedecinController) mainPane.getScene().getUserData();
-        homeMedecinController.changePaneSide("DossierDuPatient", this.activeItem);
+        homeMedecinController.changePaneSide("AfficherDossierPatient", this.activeItem);
 
     }
 }
