@@ -64,7 +64,6 @@ public class HomeGSController implements Initializable {
         } else if (Objects.equals(button.getText(), "Fiches produits")) {
             changePane("FichesProduits");
         } else if (Objects.equals(button.getText(), "Réapprovisionnement")) {
-            System.out.println(button.getText());
             changePane("Reapprovisionnement");
         }
 

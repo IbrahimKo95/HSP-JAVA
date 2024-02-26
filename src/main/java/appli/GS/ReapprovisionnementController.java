@@ -13,10 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -27,6 +24,7 @@ import models.Produit;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ReapprovisionnementController implements Initializable, BaseController<Void> {
@@ -50,10 +48,15 @@ public class ReapprovisionnementController implements Initializable, BaseControl
     private Button deleteButton;
 
     @FXML
+    private Button statutButton;
+
+    @FXML
     private Button editButton;
 
     @FXML
     private TextField researchBar;
+
+    private CommandeProduit activeItem;
 
     @FXML
     private TableView<CommandeProduit> tableView;
@@ -91,11 +94,15 @@ public class ReapprovisionnementController implements Initializable, BaseControl
 
     @FXML
     void select(MouseEvent event) {
-
+        if(tableView.getSelectionModel().getSelectedItem() != null){
+            editButton.setDisable(false);
+            deleteButton.setDisable(false);
+            statutButton.setDisable(false);
+            this.activeItem = tableView.getSelectionModel().getSelectedItem();
+        }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void refreshList() {
         CommandeProduitController commandeProduitController = new CommandeProduitController();
         RaisonCol.setCellValueFactory(cellData -> {
 
@@ -124,5 +131,33 @@ public class ReapprovisionnementController implements Initializable, BaseControl
             throw new RuntimeException(e);
         }
         tableView.setItems(list);
+    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        refreshList();
+    }
+
+    @FXML
+    void changeStatut(ActionEvent event) throws SQLException {
+        CommandeProduitController commandeProduitController = new CommandeProduitController();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Choix un statut");
+        alert.setHeaderText("Voulez vous valider ou refuser cette demande ?");
+        alert.setContentText("Choississez une option");
+
+        ButtonType buttonTypeOne = new ButtonType("Valider");
+        ButtonType buttonTypeTwo = new ButtonType("Refuser");
+        ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne){
+            commandeProduitController.valider(this.activeItem.getId());
+            refreshList();
+        } else if (result.get() == buttonTypeTwo) {
+            commandeProduitController.refuser(this.activeItem.getId());
+            refreshList();
+        }
     }
 }

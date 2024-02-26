@@ -29,7 +29,7 @@ public class FicheProduitController {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
         PreparedStatement req = co.prepareStatement(
-                "INSERT INTO fiches_produits (libelle, description, niv_dangerosite, id_gs) VALUES (?,?,?,?)");
+                "INSERT INTO fiches_produits (libelle, description, niv_dangerosite, id_gs, qte_stock) VALUES (?,?,?,?,0)");
         req.setString(1, libelle);
         req.setString(2, description);
         req.setInt(3, niv_dangerosite);

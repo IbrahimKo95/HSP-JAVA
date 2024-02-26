@@ -26,5 +26,6 @@
             <TableColumn fx:id="PrixTotal" prefWidth="123.99996948242188" text="Prix total" />
          </columns>
       </TableView>
+      <Button fx:id="statutButton" disable="true" layoutX="425.0" layoutY="217.0" mnemonicParsing="false" onAction="#changeStatut" prefHeight="26.0" prefWidth="106.0" text="Statut" />
    </children>
 </AnchorPane>
