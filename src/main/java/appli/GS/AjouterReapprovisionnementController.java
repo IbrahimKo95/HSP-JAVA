@@ -21,6 +21,7 @@ import models.FicheProduit;
 import models.Fournisseur;
 import models.Produit;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -185,7 +186,7 @@ public class AjouterReapprovisionnementController implements Initializable, Base
     }
 
     @FXML
-    void add(ActionEvent event) throws SQLException {
+    void add(ActionEvent event) throws SQLException, IOException {
         CommandeProduitController commandeProduitController = new CommandeProduitController();
         HomeGSController homeGSController = (HomeGSController) mainPane.getScene().getUserData();
         int id_commande = commandeProduitController.add(raisonInput.getText(), homeGSController.getUtilisateur().getId(), comboBox.getValue().getId());
@@ -193,7 +194,7 @@ public class AjouterReapprovisionnementController implements Initializable, Base
         for(int i = 0; i < produits.size(); i++) {
             Produit produit = (Produit) produits.get(i).getValue();
             commandeConcerneController.add(id_commande, produit.getId_fiche_produit(), Integer.parseInt(prix.get(i).getText()));
-
         }
+        homeGSController.changePaneSide("Reapprovisionnement");
     }
 }

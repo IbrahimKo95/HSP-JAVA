@@ -3,6 +3,9 @@ module appli {
     requires javafx.fxml;
     requires java.sql;
     requires java.dotenv;
+    requires simple.java.mail;
+    requires ch.qos.logback.classic;
+    requires org.slf4j;
     requires passay;
 
     opens appli to javafx.fxml;

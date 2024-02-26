@@ -62,4 +62,25 @@ public class CommandeProduitController {
         generatedKeys.next();
         return generatedKeys.getInt(1);
     }
+
+    public void refuser(int idCommande) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement req = co.prepareStatement(
+                "UPDATE commande_produit SET statut = 1 WHERE id = ?");
+        req.setInt(1, idCommande);
+        req.executeUpdate();
+
+    }
+
+    public void valider(int idCommande) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement req = co.prepareStatement(
+                "UPDATE commande_produit SET statut = 2 WHERE id = ?");
+        req.setInt(1, idCommande);
+        req.executeUpdate();
+        CommandeConcerneController commandeConcerneController = new CommandeConcerneController();
+        commandeConcerneController.valider(idCommande);
+    }
 }
