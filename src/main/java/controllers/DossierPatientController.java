@@ -39,5 +39,15 @@ public class DossierPatientController {
        return dossierPatients;
 
    }
+
+   public void  insertId(int id) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement insert = co.prepareStatement(
+                "UPDATE dossiers_patients SET id_medecin = ?");
+       insert.setInt(1, id);
+       insert.executeUpdate();
+
+   }
 }
 

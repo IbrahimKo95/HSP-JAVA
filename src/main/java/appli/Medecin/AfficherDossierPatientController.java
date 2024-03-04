@@ -1,9 +1,13 @@
 package appli.Medecin;
 
 import appli.BaseController;
+import appli.HomeMedecinController;
+import controllers.DossierPatientController;
 import controllers.PatientController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import models.DossierPatient;
 import models.Medecin;
@@ -47,15 +51,19 @@ public class AfficherDossierPatientController implements BaseController<DossierP
     private Label labelGravite;
     @FXML
     private Label labelSymptome;
+    @FXML
+    private Button chargeButton;
+
 
 
     private DossierPatient activeItem;
+    private Pane mainPane;
 
 
 
     @Override
     public void setMainPane(Pane mainPane) throws SQLException {
-
+        this.mainPane=mainPane;
     }
 
     @Override
@@ -81,9 +89,15 @@ public class AfficherDossierPatientController implements BaseController<DossierP
 
     }
 
+    @FXML
+    void takePatient(ActionEvent event) {
+        DossierPatientController dossierPatientController = new DossierPatientController();
+        DossierPatient dossierPatient = this.activeItem;
+        HomeMedecinController homeMedecinController = (HomeMedecinController) mainPane.getScene().getUserData();
+        Medecin medecin = homeMedecinController.getUtilisateur();
+        dossierPatientController.insertId();
 
-
-
+    }
 
 
 }

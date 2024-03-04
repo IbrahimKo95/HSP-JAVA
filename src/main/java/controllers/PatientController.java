@@ -24,5 +24,9 @@ public class PatientController {
         return new Patient(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getInt(6), res.getString(7), res.getInt(8));
 
     }
+
+
+
+
 }
 
