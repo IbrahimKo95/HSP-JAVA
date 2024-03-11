@@ -7,16 +7,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import models.Fournisseur;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class DossierPatientController implements BaseController<Void> {
+public class DossierPatientController implements Initializable, BaseController<Void> {
 
     private Pane mainPane;
     private Fournisseur activeItem;
@@ -50,7 +53,7 @@ public class DossierPatientController implements BaseController<Void> {
     }@FXML
     void add(ActionEvent event) throws IOException, SQLException {
         HomeSecretaireController HomeSecretaireController = (HomeSecretaireController) mainPane.getScene().getUserData();
-        HomeSecretaireController.changePaneSide("AjouterDossier");
+        HomeSecretaireController.changePaneSide("AjouterPatient");
     }
 
 
@@ -78,6 +81,11 @@ public class DossierPatientController implements BaseController<Void> {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+    }
 }
 
 
