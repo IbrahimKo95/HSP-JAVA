@@ -2,7 +2,6 @@ package controllers;
 
 import database.Bdd;
 import models.CommandeProduit;
-import models.FicheProduit;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -82,5 +81,16 @@ public class CommandeProduitController {
         req.executeUpdate();
         CommandeConcerneController commandeConcerneController = new CommandeConcerneController();
         commandeConcerneController.valider(idCommande);
+    }
+
+    public CommandeProduit getById(int id) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement recupererTout = co.prepareStatement(
+                "SELECT * FROM commande_produit WHERE id = ?");
+        recupererTout.setInt(1, id);
+        ResultSet res = recupererTout.executeQuery();
+        res.next();
+        return new CommandeProduit(res.getInt(1), res.getString(2), res.getInt(3), res.getInt(4), res.getInt(5));
     }
 }

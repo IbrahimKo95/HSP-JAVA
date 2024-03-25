@@ -17,7 +17,6 @@
       </Label>
       <Button fx:id="addButton" layoutX="56.0" layoutY="217.0" mnemonicParsing="false" onAction="#add" prefHeight="26.0" prefWidth="106.0" text="Ajouter" />
       <Button fx:id="editButton" disable="true" layoutX="178.0" layoutY="217.0" mnemonicParsing="false" onAction="#edit" prefHeight="26.0" prefWidth="106.0" text="Modifier" />
-      <Button fx:id="deleteButton" disable="true" layoutX="301.0" layoutY="217.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="106.0" text="Supprimer" />
       <TextField fx:id="researchBar" layoutX="118.0" layoutY="116.0" prefHeight="34.0" prefWidth="328.0" promptText="Rechercher par nom" />
       <Button layoutX="446.0" layoutY="116.0" mnemonicParsing="false" onAction="#research" prefHeight="34.0" prefWidth="79.0" text="Rechercher" />
       <TableView fx:id="tableView" layoutX="56.0" layoutY="257.0" onMouseClicked="#select" prefHeight="270.0" prefWidth="476.0">
@@ -26,6 +25,7 @@
             <TableColumn fx:id="PrixTotal" prefWidth="123.99996948242188" text="Prix total" />
          </columns>
       </TableView>
-      <Button fx:id="statutButton" disable="true" layoutX="425.0" layoutY="217.0" mnemonicParsing="false" onAction="#changeStatut" prefHeight="26.0" prefWidth="106.0" text="Statut" />
+      <Button fx:id="statutButton" disable="true" layoutX="300.0" layoutY="217.0" mnemonicParsing="false" onAction="#changeStatut" prefHeight="26.0" prefWidth="106.0" text="Statut" />
+      <Button fx:id="detailsButton" disable="true" layoutX="425.0" layoutY="217.0" mnemonicParsing="false" onAction="#showDetails" prefHeight="26.0" prefWidth="106.0" text="Détails" />
    </children>
 </AnchorPane>

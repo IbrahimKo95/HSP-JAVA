@@ -1,6 +1,7 @@
 package appli.GS;
 
 import appli.BaseController;
+import appli.HelloApplication;
 import appli.HomeGSController;
 import controllers.CommandeProduitController;
 import controllers.FicheProduitController;
@@ -35,6 +36,9 @@ public class ReapprovisionnementController implements Initializable, BaseControl
     private AnchorPane FournisseursPane;
 
     @FXML
+    private Button detailsButton;
+
+    @FXML
     private TableColumn<CommandeProduit, Double> PrixTotal;
 
     @FXML
@@ -44,8 +48,6 @@ public class ReapprovisionnementController implements Initializable, BaseControl
     @FXML
     private Button addButton;
 
-    @FXML
-    private Button deleteButton;
 
     @FXML
     private Button statutButton;
@@ -77,10 +79,6 @@ public class ReapprovisionnementController implements Initializable, BaseControl
         homeGSController.changePaneSide("AjouterReapprovisionnement");
     }
 
-    @FXML
-    void delete(ActionEvent event) {
-
-    }
 
     @FXML
     void edit(ActionEvent event) {
@@ -96,8 +94,8 @@ public class ReapprovisionnementController implements Initializable, BaseControl
     void select(MouseEvent event) {
         if(tableView.getSelectionModel().getSelectedItem() != null){
             editButton.setDisable(false);
-            deleteButton.setDisable(false);
             statutButton.setDisable(false);
+            detailsButton.setDisable(false);
             this.activeItem = tableView.getSelectionModel().getSelectedItem();
         }
     }
@@ -152,12 +150,18 @@ public class ReapprovisionnementController implements Initializable, BaseControl
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeOne){
+        if (result.get() == buttonTypeOne) {
             commandeProduitController.valider(this.activeItem.getId());
             refreshList();
         } else if (result.get() == buttonTypeTwo) {
             commandeProduitController.refuser(this.activeItem.getId());
             refreshList();
         }
+    }
+
+
+    @FXML
+    void showDetails(ActionEvent event) {
+        HelloApplication.newStage("PopUpDetailsCommande");
     }
 }
