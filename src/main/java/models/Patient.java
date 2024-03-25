@@ -9,17 +9,17 @@ public class Patient {
     private int id;
     private String nom;
     private String prenom;
-    private String numSecu;
+    private String num_secu;
     private String email;
     private int tel;
     private String adresse;
     private int id_secretaire;
 
-    public Patient(int id, String nom, String prenom, String numSecu, String email, int tel, String adresse, int id_secretaire) {
+    public Patient(int id, String nom, String prenom, String num_secu, String email, int tel, String adresse, int id_secretaire) {
         this.id=id;
         this.nom=nom;
         this.prenom=prenom;
-        this.numSecu=numSecu;
+        this.num_secu=num_secu;
         this.email=email;
         this.tel=tel;
         this.adresse=adresse;
@@ -51,12 +51,12 @@ public class Patient {
         this.prenom = prenom;
     }
 
-    public String getNumSecu() {
-        return numSecu;
+    public String getnum_secu() {
+        return num_secu;
     }
 
-    public void setNumSecu(String numSecu) {
-        this.numSecu = numSecu;
+    public void setnum_secu(String num_secu) {
+        this.num_secu = num_secu;
     }
 
     public String getEmail() {

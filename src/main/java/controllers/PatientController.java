@@ -25,7 +25,20 @@ public class PatientController {
 
     }
 
-
+    public boolean add(String prenom, String nom, String num_secu, String email, String adresse, String telephone) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement add = co.prepareStatement(
+                "INSERT INTO utilisateurs (nom, prenom, num_secu, email, adresse, tel) VALUES (?,?,?,?,?,?)");
+        add.setString(1, nom);
+        add.setString(2, prenom);
+        add.setString(3, num_secu);
+        add.setString(4, email);
+        add.setString(5, adresse);
+        add.setString(6, telephone);
+        add.executeUpdate();
+        return true;
+    }
 
 
 }

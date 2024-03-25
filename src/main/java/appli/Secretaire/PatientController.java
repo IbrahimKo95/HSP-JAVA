@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import models.Fournisseur;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,6 +30,13 @@ public class PatientController implements BaseController<Void> {
     public void setMainPane(Pane mainPane) {
         this.mainPane = mainPane;
     }
+
+
+    void add(ActionEvent event) throws IOException, SQLException {
+        HomeSecretaireController HomeSecretaireController = (HomeSecretaireController) mainPane.getScene().getUserData();
+        HomeSecretaireController.changePaneSide("AjouterPatient");
+    }
+
 
     @Override
     public void setObject(Void object) {
