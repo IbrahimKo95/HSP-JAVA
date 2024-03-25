@@ -40,12 +40,22 @@ public class DossierPatientController {
 
    }
 
-   public void  insertId(int id) throws SQLException {
+   public void  insertId(int id,int idP) throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
         PreparedStatement insert = co.prepareStatement(
-                "UPDATE dossiers_patients SET id_medecin = ?");
+                "UPDATE dossiers_patients SET id_medecin = ? WHERE id = ?");
        insert.setInt(1, id);
+       insert.setInt(2, idP);
+       insert.executeUpdate();
+
+   }
+   public void nullId(int idP) throws SQLException {
+       Bdd bdd = new Bdd();
+       Connection co = bdd.getInstance();
+       PreparedStatement insert = co.prepareStatement(
+               "UPDATE dossiers_patients SET id_medecin =  NULL  WHERE id = ?");
+       insert.setInt(1, idP);
        insert.executeUpdate();
 
    }

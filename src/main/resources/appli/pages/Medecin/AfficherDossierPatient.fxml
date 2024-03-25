@@ -68,5 +68,7 @@
          </font>
       </Label>
       <Button fx:id="chargeButton" layoutX="403.0" layoutY="448.0" mnemonicParsing="false" onAction="#takePatient" text="Prendre en charge" />
+      <Button fx:id="chargeButton2" layoutX="382.0" layoutY="448.0" mnemonicParsing="false" onAction="#noTakePatient" text="Annuler la prise en charge" />
+      <Button fx:id="soinButton" layoutX="53.0" layoutY="448.0" mnemonicParsing="false" onAction="#soinPatient" text="Soins adapté" />
    </children>
 </AnchorPane>
