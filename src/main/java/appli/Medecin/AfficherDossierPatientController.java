@@ -95,7 +95,7 @@ public class AfficherDossierPatientController implements BaseController<DossierP
         DossierPatient dossierPatient = this.activeItem;
         HomeMedecinController homeMedecinController = (HomeMedecinController) mainPane.getScene().getUserData();
         Medecin medecin = homeMedecinController.getUtilisateur();
-        dossierPatientController.insertId();
+        //dossierPatientController.insertId();
 
     }
 

@@ -82,8 +82,13 @@ public class AjouterReapprovisionnementController implements Initializable, Base
         VBox group = new VBox(comboBox, textField);
         Button deleteButton = new Button("-");
         VBox finalContent = content;
-        deleteButton.setOnAction(e -> finalContent.getChildren().remove(group));
+        deleteButton.setOnAction(e -> {
+            finalContent.getChildren().remove(group);
+            this.produits.remove(comboBox);
+            this.prix.remove(textField);
+        });
         group.getChildren().add(deleteButton);
+
         VBox.setVgrow(group, Priority.ALWAYS);
 
         VBox.setMargin(group, new Insets(0, 0, 15, 0));

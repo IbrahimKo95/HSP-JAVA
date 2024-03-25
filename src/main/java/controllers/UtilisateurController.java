@@ -47,4 +47,27 @@ public class UtilisateurController {
         add.executeUpdate();
         return true;
     }
+
+    public Utilisateur getById(int id) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement login = co.prepareStatement(
+                "SELECT * FROM utilisateurs WHERE id = ?");
+        login.setInt(1, id);
+        ResultSet res = login.executeQuery();
+        if (res.next()) {
+            if (res.getString(5).equals("gs")) {
+                return new GS(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(6), res.getString(5));
+            } else if (res.getString(5).equals("medecin")) {
+                return new Medecin(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(6), res.getString(5));
+            } else if (res.getString(5).equals("secretaire")) {
+                return new Secretaire(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(6), res.getString(5));
+            } else if (res.getString(5).equals("admin")) {
+                return new Utilisateur(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(6), res.getString(5));
+            }
+
+        }
+        return null;
+    }
+
 }

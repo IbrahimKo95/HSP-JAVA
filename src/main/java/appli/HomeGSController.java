@@ -65,8 +65,9 @@ public class HomeGSController implements Initializable {
             changePane("FichesProduits");
         } else if (Objects.equals(button.getText(), "Réapprovisionnement")) {
             changePane("Reapprovisionnement");
+        } else if (Objects.equals(button.getText(), "Demandes de produits")) {
+            changePane("DemandeProduits");
         }
-
     }
 
    public void changePane(String name) throws IOException, SQLException {
