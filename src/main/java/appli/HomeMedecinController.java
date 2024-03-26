@@ -53,7 +53,7 @@ public class HomeMedecinController implements Initializable {
         basePane.getChildren().setAll();
         Button button = (Button) event.getSource();
         if(Objects.equals(button.getText(), "Dossier Patient ")) {
-            changePane("DossierPatient");
+            changePaneSide("DossierPatient", this.utilisateur);
         }
     }
 

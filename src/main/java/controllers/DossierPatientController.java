@@ -57,7 +57,26 @@ public class DossierPatientController {
                "UPDATE dossiers_patients SET id_medecin =  NULL  WHERE id = ?");
        insert.setInt(1, idP);
        insert.executeUpdate();
-
    }
+
+   public void conclusion1(int idD) throws SQLException {
+       Bdd bdd = new Bdd();
+       Connection co = bdd.getInstance();
+       PreparedStatement insert = co.prepareStatement(
+               "UPDATE dossiers_patients SET conclusion =  ? WHERE id = ? ");
+       insert.setInt(1, 1);
+       insert.setInt(2,idD);
+       insert.executeUpdate();
+   }
+
+    public void conclusion2(int idD) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement insert = co.prepareStatement(
+                "UPDATE dossiers_patients SET conclusion =  ? WHERE id = ? ");
+        insert.setInt(1, 2);
+        insert.setInt(2,idD);
+        insert.executeUpdate();
+    }
 }
 

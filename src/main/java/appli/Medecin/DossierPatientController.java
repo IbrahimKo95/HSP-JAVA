@@ -95,7 +95,13 @@ public class DossierPatientController implements BaseController<Medecin>, Initia
 
     @Override
     public void setObject(Medecin object) throws SQLException {
-        this.medecin = object;
+        if(object == null) {
+            HomeMedecinController homeMedecinController = (HomeMedecinController) mainPane.getScene().getUserData();
+            this.medecin = homeMedecinController.getUtilisateur();
+        } else {
+            this.medecin = object;
+        }
+        System.out.println(this.medecin.getNom());
         refreshList();
     }
 

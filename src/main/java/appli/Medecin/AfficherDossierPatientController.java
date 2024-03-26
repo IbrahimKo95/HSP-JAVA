@@ -7,17 +7,18 @@ import controllers.PatientController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import models.DossierPatient;
 import models.Medecin;
-import javafx.scene.control.Label;
 import models.Patient;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -123,10 +124,30 @@ public class AfficherDossierPatientController implements BaseController<DossierP
 
     }
     @FXML
-    void soinPatient(ActionEvent event) {
+    void soinPatient(ActionEvent event) throws SQLException, IOException {
+        DossierPatientController dossierPatientController = new DossierPatientController();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Soins adapté");
+        alert.setHeaderText("Voulez vous faire une ordonnance ou une hospitalisation?");
+        alert.setContentText("Choississez une option");
+
+        ButtonType buttonTypeOne = new ButtonType("Ordonnance");
+        ButtonType buttonTypeTwo = new ButtonType("Hospitalisation");
+        ButtonType buttonTypeCancel = new ButtonType("Annuler", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == buttonTypeOne) {
+            dossierPatientController.conclusion1(this.activeItem.getId());
+        } else if (result.get() == buttonTypeTwo) {
+            dossierPatientController.conclusion2(this.activeItem.getId());
+            HomeMedecinController homeMedecinController = (HomeMedecinController) mainPane.getScene().getUserData();
+            homeMedecinController.changePaneSide("Hospitalisation", this.activeItem);
+        }
 
     }
-
-
 
 }
