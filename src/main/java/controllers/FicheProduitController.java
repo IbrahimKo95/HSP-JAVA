@@ -68,4 +68,24 @@ public class FicheProduitController {
         res.next();
         return new FicheProduit(res.getInt(1), res.getString(2), res.getString(3), res.getInt(4), res.getInt(5), res.getInt(6));
     }
+
+    public ArrayList<FicheProduit> getByCommande(int id_commande) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement req = co.prepareStatement(
+                "SELECT * FROM commandes_concerne WHERE id_commande = ?");
+        req.setInt(1, id_commande);
+        ResultSet res = req.executeQuery();
+        ArrayList<FicheProduit> ficheProduits = new ArrayList<>();
+        while (res.next()) {
+            PreparedStatement update = co.prepareStatement(
+                    "SELECT * FROM fiches_produits WHERE id = ?");
+            update.setInt(1, res.getInt(1));
+            ResultSet res2 = update.executeQuery();
+            if (res2.next()) {
+                ficheProduits.add(new FicheProduit(res2.getInt(1), res2.getString(2), res2.getString(3), res2.getInt(4), res2.getInt(5), res2.getInt(6)));
+            }
+        }
+        return ficheProduits;
+    }
 }
