@@ -26,19 +26,6 @@ public class DemandeProduitController {
         return demandeProduits;
     }
 
-    public Double getPrixTotal(int id) throws SQLException {
-        Bdd bdd = new Bdd();
-        Connection co = bdd.getInstance();
-        PreparedStatement getPrice = co.prepareStatement(
-                " SELECT SUM(cc.quantite * p.prix) as total FROM demandes_concerne cc JOIN produits p ON cc.id_fiche_produit = p.id_fiche_produit WHERE cc.id_fiche_produit = ?;");
-        getPrice.setInt(1, id);
-        ResultSet res = getPrice.executeQuery();
-        res.next();
-        double total = res.getDouble("total");
-        total = Math.round(total * 100.0) / 100.0;
-        return total;
-    }
-
     public void valider(int idCommande) throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
@@ -46,6 +33,8 @@ public class DemandeProduitController {
                 "UPDATE demandes_produits SET statut = 2 WHERE id = ?");
         req.setInt(1, idCommande);
         req.executeUpdate();
+        DemandeConcerneController demandeConcerneController = new DemandeConcerneController();
+        demandeConcerneController.valider(idCommande);
     }
 
     public void refuser(int idCommande) throws SQLException {

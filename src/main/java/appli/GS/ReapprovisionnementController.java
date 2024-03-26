@@ -162,6 +162,6 @@ public class ReapprovisionnementController implements Initializable, BaseControl
 
     @FXML
     void showDetails(ActionEvent event) {
-        HelloApplication.newStage("PopUpDetailsCommande");
+        HelloApplication.newStage("PopUpDetailsCommande", new PopUpDetailsCommandeController(this.activeItem));
     }
 }

@@ -2,6 +2,7 @@ package appli.GS;
 
 import appli.BaseController;
 import controllers.CommandeProduitController;
+import controllers.DemandeConcerneController;
 import controllers.DemandeProduitController;
 import controllers.UtilisateurController;
 import javafx.beans.property.DoubleProperty;
@@ -59,6 +60,7 @@ public class DemandeProduitsController implements Initializable, BaseController<
     @FXML
     void changeStatut(ActionEvent event) throws SQLException {
         DemandeProduitController demandeProduitController = new DemandeProduitController();
+        DemandeConcerneController demandeConcerneController = new DemandeConcerneController();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Choix un statut");
         alert.setHeaderText("Voulez vous valider ou refuser cette demande ?");
@@ -72,8 +74,16 @@ public class DemandeProduitsController implements Initializable, BaseController<
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonTypeOne){
-            demandeProduitController.valider(this.activeItem.getId());
-            refreshList();
+            if(demandeConcerneController.canValide(this.activeItem.getId())){
+                demandeProduitController.valider(this.activeItem.getId());
+                refreshList();
+            } else {
+                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                alert2.setTitle("Erreur");
+                alert2.setHeaderText("Impossible de valider cette demande");
+                alert2.setContentText("Il n'y as pas assez de produits en stocks pour valider cette demande");
+                alert2.showAndWait();
+            }
         } else if (result.get() == buttonTypeTwo) {
             demandeProduitController.refuser(this.activeItem.getId());
             refreshList();

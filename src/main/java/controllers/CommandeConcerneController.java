@@ -1,6 +1,7 @@
 package controllers;
 
 import database.Bdd;
+import models.CommandeConcerne;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,4 +36,18 @@ public class CommandeConcerneController {
             update.executeUpdate();
         }
     }
+
+    public CommandeConcerne getByFiche(int id_commande, int id_fiche) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement req = co.prepareStatement(
+                "SELECT * FROM commandes_concerne WHERE id_commande = ? AND id_fiche_produit = ?");
+        req.setInt(1, id_commande);
+        req.setInt(2, id_fiche);
+        ResultSet res = req.executeQuery();
+        res.next();
+        return new CommandeConcerne(res.getInt(1), res.getInt(2), res.getInt(3));
+    }
+
+
 }

@@ -5,6 +5,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import models.Medecin;
 import org.passay.CharacterRule;
@@ -25,6 +26,8 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         maStage.setTitle("RHP");
+        Image applicationIcon = new Image(getClass().getResourceAsStream("/img/icon.png"));
+        maStage.getIcons().add(applicationIcon);
         maStage.setScene(scene);
         maStage.setResizable(false);
         maStage.show();

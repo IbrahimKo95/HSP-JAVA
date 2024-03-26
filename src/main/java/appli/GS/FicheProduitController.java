@@ -3,7 +3,6 @@ package appli.GS;
 import appli.BaseController;
 import appli.HelloApplication;
 import appli.HomeGSController;
-import appli.PopUpFicheProduitController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
