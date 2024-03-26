@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import models.DossierPatient;
 import models.Medecin;
@@ -53,6 +54,12 @@ public class AfficherDossierPatientController implements BaseController<DossierP
     private Label labelSymptome;
     @FXML
     private Button chargeButton;
+    @FXML
+    private Button chargeButton2;
+    @FXML
+    private Button soinButton;
+
+
 
 
 
@@ -69,6 +76,14 @@ public class AfficherDossierPatientController implements BaseController<DossierP
     @Override
     public void setObject(DossierPatient object) throws SQLException {
         this.activeItem = object;
+        if(object.getId_medecin() != 0){
+            chargeButton.setVisible(false);
+
+                }
+        else {
+            chargeButton2.setVisible(false);
+        }
+
         labelTitle.setText("Dossier patient n° "+this.activeItem.getId());
         PatientController patientController = new PatientController();
         Patient patient = patientController.getById(this.activeItem.getId_patient());
@@ -89,15 +104,29 @@ public class AfficherDossierPatientController implements BaseController<DossierP
 
     }
 
+
     @FXML
-    void takePatient(ActionEvent event) {
+    void takePatient(ActionEvent event) throws SQLException {
         DossierPatientController dossierPatientController = new DossierPatientController();
-        DossierPatient dossierPatient = this.activeItem;
         HomeMedecinController homeMedecinController = (HomeMedecinController) mainPane.getScene().getUserData();
         Medecin medecin = homeMedecinController.getUtilisateur();
-        //dossierPatientController.insertId();
+        dossierPatientController.insertId(medecin.getId(),this.activeItem.getId());
+        chargeButton.setVisible(false);
+        chargeButton2.setVisible(true);
+    }
+    @FXML
+    void noTakePatient(ActionEvent event) throws SQLException {
+        DossierPatientController dossierPatientController = new DossierPatientController();
+        dossierPatientController.nullId(this.activeItem.getId());
+        chargeButton2.setVisible(false);
+        chargeButton.setVisible(true);
 
     }
+    @FXML
+    void soinPatient(ActionEvent event) {
+
+    }
+
 
 
 }

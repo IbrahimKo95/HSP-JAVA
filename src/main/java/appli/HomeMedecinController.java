@@ -52,16 +52,12 @@ public class HomeMedecinController implements Initializable {
     void changePage(ActionEvent event) throws IOException, SQLException {
         basePane.getChildren().setAll();
         Button button = (Button) event.getSource();
-        if(Objects.equals(button.getText(), "Dossier Patient")) {
+        if(Objects.equals(button.getText(), "Dossier Patient ")) {
             changePane("DossierPatient");
-        } else if (Objects.equals(button.getText(), "Accueil")) {
-            changePane("Accueil");
-        } else if (Objects.equals(button.getText(), "Fiches produits")) {
-            changePane("FichesProduits");
         }
     }
 
-    public void changePane(String name) throws IOException, SQLException {
+    public void changePane(String name) throws SQLException, IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/appli/pages/Medecin/"+name+".fxml"));
         Pane pane = loader.load();
         Object controller = loader.getController();
@@ -69,7 +65,6 @@ public class HomeMedecinController implements Initializable {
             BaseController baseController = (BaseController) controller;
             baseController.setMainPane(basePane);
         }
-
         basePane.getChildren().add(pane);
     }
 
