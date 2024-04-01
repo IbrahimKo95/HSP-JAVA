@@ -39,7 +39,7 @@ public class PatientController {
 
     }
 
-    public void add(String prenom, String nom, String num_secu, String email, String adresse, String telephone) throws SQLException {
+    public void add(String prenom, String nom, String num_secu, String email, String adresse, String telephone, int id_secretaire) throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
         PreparedStatement add = co.prepareStatement(

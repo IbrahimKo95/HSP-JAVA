@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import models.Medecin;
 import models.Secretaire;
 
 import java.io.IOException;
@@ -34,6 +35,10 @@ public class HomeSecretaireController implements Initializable {
 
 
     private Secretaire utilisateur;
+
+    public Secretaire getUtilisateur() {
+        return utilisateur;
+    }
 
     public HomeSecretaireController(Secretaire utilisateur) {
         this.utilisateur = utilisateur;

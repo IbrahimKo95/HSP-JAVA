@@ -49,7 +49,8 @@ public class AjouterPatientController implements BaseController<Void> {
     public void add(ActionEvent event) throws SQLException {
         PatientController PatientController = new PatientController();
         if(!nomInput.getText().isEmpty() && !prenomInput.getText().isEmpty() && !numsecuInput.getText().isEmpty() && !emailInput.getText().isEmpty() && !adresseInput.getText().isEmpty() && !telephoneInput.getText().isEmpty()) {
-            PatientController.add(nomInput.getText(), prenomInput.getText(), numsecuInput.getText(), emailInput.getText(), adresseInput.getText(), telephoneInput.getText());
+            HomeSecretaireController HomeSecretaireController = (HomeSecretaireController) mainPane.getScene().getUserData();
+            PatientController.add(nomInput.getText(), prenomInput.getText(), numsecuInput.getText(), emailInput.getText(), adresseInput.getText(), telephoneInput.getText(), HomeSecretaireController.getUtilisateur().getId());
         } else {
             System.out.println("erreur");
         }
