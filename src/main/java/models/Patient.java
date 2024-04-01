@@ -51,11 +51,11 @@ public class Patient {
         this.prenom = prenom;
     }
 
-    public String getnum_secu() {
+    public String getNum_secu() {
         return num_secu;
     }
 
-    public void setnum_secu(String num_secu) {
+    public void setNum_secu(String num_secu) {
         this.num_secu = num_secu;
     }
 

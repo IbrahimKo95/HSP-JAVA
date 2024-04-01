@@ -25,11 +25,25 @@ public class PatientController {
 
     }
 
-    public boolean add(String prenom, String nom, String num_secu, String email, String adresse, String telephone) throws SQLException {
+    public ArrayList<Patient> getAll() throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement recuperer = co.prepareStatement(
+                "SELECT*FROM patients");
+        ResultSet res = recuperer.executeQuery();
+        ArrayList<Patient> Patients = new ArrayList<>();
+        while (res.next()) {
+            Patients.add(new Patient(res.getInt(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getInt(6), res.getString(7), res.getInt(8)));
+        }
+        return Patients;
+
+    }
+
+    public void add(String prenom, String nom, String num_secu, String email, String adresse, String telephone) throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
         PreparedStatement add = co.prepareStatement(
-                "INSERT INTO utilisateurs (nom, prenom, num_secu, email, adresse, tel) VALUES (?,?,?,?,?,?)");
+                "INSERT INTO patients (nom, prenom, num_secu, email, adresse, tel) VALUES (?,?,?,?,?,?)");
         add.setString(1, nom);
         add.setString(2, prenom);
         add.setString(3, num_secu);
@@ -37,7 +51,6 @@ public class PatientController {
         add.setString(5, adresse);
         add.setString(6, telephone);
         add.executeUpdate();
-        return true;
     }
 
 

@@ -48,7 +48,7 @@ public class AjouterPatientController implements BaseController<Void> {
     @FXML
     public void add(ActionEvent event) throws SQLException {
         PatientController PatientController = new PatientController();
-        if(!nomInput.getText().isEmpty() || !prenomInput.getText().isEmpty() || !numsecuInput.getText().isEmpty() || !emailInput.getText().isEmpty() || !adresseInput.getText().isEmpty()|| !telephoneInput.getText().isEmpty()) {
+        if(!nomInput.getText().isEmpty() && !prenomInput.getText().isEmpty() && !numsecuInput.getText().isEmpty() && !emailInput.getText().isEmpty() && !adresseInput.getText().isEmpty() && !telephoneInput.getText().isEmpty()) {
             PatientController.add(nomInput.getText(), prenomInput.getText(), numsecuInput.getText(), emailInput.getText(), adresseInput.getText(), telephoneInput.getText());
         } else {
             System.out.println("erreur");

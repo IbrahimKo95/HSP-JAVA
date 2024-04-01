@@ -93,7 +93,7 @@ public class AfficherDossierPatientController implements BaseController<DossierP
         labelAdresse.setText("Adresse: "+patient.getAdresse());
         labelEmail.setText("Email: "+patient.getEmail());
         labelTel.setText("Tel: "+patient.getTel());
-        labelSecu.setText("Num sécurité sociale: "+patient.getnum_secu());
+        labelSecu.setText("Num sécurité sociale: "+patient.getNum_secu());
         labelHeure.setText("Heure venue: "+this.activeItem.getHeure_venue());
         labelDate.setText("Date venue:  "+this.activeItem.getDate_venue());
         labelSymptome.setText("Symptomes: "+this.activeItem.getSymptomes());

@@ -58,8 +58,6 @@ public class AjouterUtilisateurController implements Initializable, BaseControll
         UtilisateurController utilisateurController = new UtilisateurController();
         if(!prenomInput.getText().isEmpty() || !nomInput.getText().isEmpty() || !passwordInput.getText().isEmpty() || !emailInput.getText().isEmpty() || !(comboBox.getValue() == null)) {
             utilisateurController.addUser(prenomInput.getText(), nomInput.getText(), passwordInput.getText(), emailInput.getText(), comboBox.getValue());
-            Mail email = new Mail();
-            email.sendMail("test", "test", "test");
         } else {
             System.out.println("erreur");
         }
