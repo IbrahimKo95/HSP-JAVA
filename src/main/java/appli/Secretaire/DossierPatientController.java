@@ -73,7 +73,7 @@ public class DossierPatientController implements Initializable, BaseController<V
     }@FXML
     void add(ActionEvent event) throws IOException, SQLException {
         HomeSecretaireController HomeSecretaireController = (HomeSecretaireController) mainPane.getScene().getUserData();
-        HomeSecretaireController.changePaneSide("AjouterPatient");
+        HomeSecretaireController.changePaneSide("AjouterDossiersPatients");
     }
 
 

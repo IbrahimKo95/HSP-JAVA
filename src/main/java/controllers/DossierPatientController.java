@@ -78,5 +78,18 @@ public class DossierPatientController {
         insert.setInt(2,idD);
         insert.executeUpdate();
     }
+
+    public void add(int gravite, String symptome, int id_secretaire, int id_patient) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement insert = co.prepareStatement(
+                "INSERT INTO dossiers_patients (gravite, symptomes, date_venue, heure_venue, id_secretaire, conclusion, id_patient) VALUES (?,?,CURRENT_DATE,CURRENT_TIME,?,0, ?) ");
+        insert.setInt(1, gravite);
+        insert.setString(2, symptome);
+        insert.setInt(3, id_secretaire);
+        insert.setInt(4, id_patient);
+        insert.executeUpdate();
+    }
+
 }
 
