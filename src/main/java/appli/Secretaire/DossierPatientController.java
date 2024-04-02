@@ -61,6 +61,8 @@ public class DossierPatientController implements Initializable, BaseController<V
     @FXML
     private TableView<DossierPatient> table;
 
+    private DossierPatient activeItem;
+
 
     @Override
     public void setMainPane(Pane mainPane) {
@@ -97,8 +99,9 @@ public class DossierPatientController implements Initializable, BaseController<V
     }
 
     @FXML
-    void showProducts(ActionEvent event) {
-
+    void showProducts(ActionEvent event) throws SQLException, IOException {
+        HomeSecretaireController HomeSecretaireController = (HomeSecretaireController) mainPane.getScene().getUserData();
+        HomeSecretaireController.changePaneSide("AfficherDossierPatient", this.activeItem);
     }
 
     @Override
@@ -121,7 +124,12 @@ public class DossierPatientController implements Initializable, BaseController<V
 
     @FXML
     void selectItems(MouseEvent event) {
-
+        if(table.getSelectionModel().getSelectedItem() != null){
+            editButton.setDisable(false);
+            deleteButton.setDisable(false);
+            showButton.setDisable(false);
+            this.activeItem = table.getSelectionModel().getSelectedItem();
+        }
     }
 }
 
