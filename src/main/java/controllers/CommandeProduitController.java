@@ -6,8 +6,17 @@ import models.CommandeProduit;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Cette classe gère les opérations liées aux commandes de produits dans l'application.
+ */
 public class CommandeProduitController {
 
+    /**
+     * Récupère toutes les nouvelles commandes de produits.
+     *
+     * @return Une liste des nouvelles commandes de produits.
+     * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête.
+     */
     public ArrayList<CommandeProduit> getAllNew() throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
@@ -21,6 +30,12 @@ public class CommandeProduitController {
         return commandeProduit;
     }
 
+    /**
+     * Récupère toutes les anciennes commandes de produits.
+     *
+     * @return Une liste des anciennes commandes de produits.
+     * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête.
+     */
     public ArrayList<CommandeProduit> getAllOld() throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
@@ -34,6 +49,13 @@ public class CommandeProduitController {
         return commandeProduit;
     }
 
+    /**
+     * Calcule le prix total d'une commande en fonction de son identifiant.
+     *
+     * @param id L'identifiant de la commande.
+     * @return Le prix total de la commande.
+     * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête.
+     */
     public Double getPrixTotal(int id) throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
@@ -43,11 +65,19 @@ public class CommandeProduitController {
         ResultSet res = getPrice.executeQuery();
         res.next();
         double total = res.getDouble("total");
-        total = Math.round(total * 100.0) / 100.0; // Round to two decimal places
+        total = Math.round(total * 100.0) / 100.0; // Arrondi à deux décimales
         return total;
     }
 
-
+    /**
+     * Ajoute une nouvelle commande de produits dans la base de données.
+     *
+     * @param raison         La raison de la commande.
+     * @param id_gs          L'identifiant du gestionnaire de stock associé à la commande.
+     * @param id_fournisseur L'identifiant du fournisseur associé à la commande.
+     * @return L'identifiant de la nouvelle commande ajoutée.
+     * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête.
+     */
     public int add(String raison, int id_gs, int id_fournisseur) throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
@@ -62,6 +92,12 @@ public class CommandeProduitController {
         return generatedKeys.getInt(1);
     }
 
+    /**
+     * Refuse une commande de produits en mettant à jour son statut.
+     *
+     * @param idCommande L'identifiant de la commande à refuser.
+     * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête.
+     */
     public void refuser(int idCommande) throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
@@ -69,9 +105,14 @@ public class CommandeProduitController {
                 "UPDATE commande_produit SET statut = 1 WHERE id = ?");
         req.setInt(1, idCommande);
         req.executeUpdate();
-
     }
 
+    /**
+     * Valide une commande de produits en mettant à jour son statut et les commandes concernées associées.
+     *
+     * @param idCommande L'identifiant de la commande à valider.
+     * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête.
+     */
     public void valider(int idCommande) throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();
@@ -83,6 +124,13 @@ public class CommandeProduitController {
         commandeConcerneController.valider(idCommande);
     }
 
+    /**
+     * Récupère une commande de produits en fonction de son identifiant.
+     *
+     * @param id L'identifiant de la commande.
+     * @return La commande de produits correspondante.
+     * @throws SQLException Si une erreur SQL survient lors de l'exécution de la requête.
+     */
     public CommandeProduit getById(int id) throws SQLException {
         Bdd bdd = new Bdd();
         Connection co = bdd.getInstance();

@@ -10,12 +10,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import libs.Mail;
 import org.passay.CharacterRule;
 import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
-import org.simplejavamail.email.Email;
-import org.simplejavamail.email.EmailBuilder;
+
 
 import java.net.URL;
 import java.sql.SQLException;

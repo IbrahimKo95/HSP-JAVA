@@ -1,11 +1,8 @@
-module appli {
+module app {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
     requires java.dotenv;
-    requires simple.java.mail;
-    requires ch.qos.logback.classic;
-    requires org.slf4j;
     requires passay;
 
     opens appli to javafx.fxml;
@@ -15,4 +12,7 @@ module appli {
     opens appli.Medecin to javafx.fxml;
     opens models to javafx.base;
     exports appli;
+    exports models;
+    exports controllers;
+    exports database;
 }
