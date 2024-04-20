@@ -14,6 +14,15 @@ public class Hospitalisation {
     private int id_dossier; // Identifiant du dossier médical du patient hospitalisé.
     private int id_chambre; // Identifiant de la chambre dans laquelle le patient est hospitalisé.
 
+    public Hospitalisation(int id, LocalDate date_hospitalisation, LocalTime heure_hospitalisation, LocalDate date_fin_hospitalisation, int id_dossier, int id_chambre) {
+        this.id = id;
+        this.date_hospitalisation = date_hospitalisation;
+        this.heure_hospitalisation = heure_hospitalisation;
+        this.date_fin_hospitalisation = date_fin_hospitalisation;
+        this.id_dossier = id_dossier;
+        this.id_chambre = id_chambre;
+    }
+
     /**
      * Méthode permettant d'obtenir l'identifiant de l'hospitalisation.
      * @return L'identifiant de l'hospitalisation.

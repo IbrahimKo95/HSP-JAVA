@@ -8,6 +8,11 @@ public class Chambre {
     private int id;
     private int numero;
 
+    public Chambre(int id, int numero) {
+        this.id = id;
+        this.numero = numero;
+    }
+
     /**
      * Récupère l'ID de la chambre.
      * @return l'ID de la chambre.

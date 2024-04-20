@@ -53,6 +53,7 @@ public class AfficherDossierPatientController implements BaseController<DossierP
     private Label labelGravite;
     @FXML
     private Label labelSymptome;
+
     @FXML
     private Button chargeButton;
     @FXML
