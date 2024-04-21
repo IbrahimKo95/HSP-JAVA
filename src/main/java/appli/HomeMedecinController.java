@@ -54,6 +54,8 @@ public class HomeMedecinController implements Initializable {
         Button button = (Button) event.getSource();
         if(Objects.equals(button.getText(), "Dossier Patient ")) {
             changePaneSide("DossierPatient", this.utilisateur);
+        } else if (Objects.equals(button.getText(), "Demandes de produits")) {
+            changePaneSide("DemandeProduit", this.utilisateur);
         }
     }
 

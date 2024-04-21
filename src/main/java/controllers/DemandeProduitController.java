@@ -3,10 +3,7 @@ package controllers;
 import database.Bdd;
 import models.DemandeProduit;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -50,7 +47,18 @@ public class DemandeProduitController {
         DemandeConcerneController demandeConcerneController = new DemandeConcerneController();
         demandeConcerneController.valider(idCommande);
     }
+    public void addDemande(String raison, int statut,int id_medecin) throws SQLException {
+        Bdd bdd = new Bdd();
+        Connection co = bdd.getInstance();
+        PreparedStatement req = co.prepareStatement(
+                "INSERT INTO  demandes_produits (raison,statut,id_medecin) VALUES (?,?,?)"
+        );
+        req.setString(1, raison);
+        req.setInt(2, statut);
+        req.setInt(3, id_medecin);
+        req.executeUpdate();
 
+    }
     /**
      * Refuse une demande de produit en mettant à jour son statut.
      *
